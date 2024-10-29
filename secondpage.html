@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Suggestion and Recipe Finder</title>
+    <style>
+        /* Basic styling */
+        body {
+            background-color: blanchedalmond;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        header {
+            background-color: maroon;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 1em;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* Style the right side links in the header */
+        .header-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        /* Link styling in header */
+        .header-link {
+            color: white;
+            background-color: peru;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Hover effect */
+        .header-link:hover {
+            background-color: rosybrown;
+        }
+
+        /* Form container */
+        .form-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Form row styling */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: maroon;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* Meal display section */
+        #mealsDisplay {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .meal-container {
+            background-color: chocolate;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .meal-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .meal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: chocolate;
+            color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* Image and text container inside modal */
+        .modal-image-container {
+            width: 35%;
+            text-align: center;
+        }
+
+        .modal-image-container img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .modal-details-container {
+            width: 60%;
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .modal-body ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: maroon;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="index.html">
+            <img src="Screenshot_2024-10-28_182841-removebg-preview.png" alt="GoodMeals Logo" class="logo">
+        </a>
+        <h1 class="header-title">GoodMeals!</h1>
+    </div>
+    <div class="header-right">
+        <a href="fav.html" class="header-link">Favorites</a>
+        <a href="crud.html" class="header-link">Meals Planner</a>
+    </div>
+</header>
+
+<div class="form-container">
+    <h2>Get Inspired with Delicious Recipes</h2>
+    <div class="form-row">
+        <label for="category_input">Category:</label>
+        <input type="text" id="category_input" placeholder="Enter meal category">
+        
+        <label for="ingredient_input">Ingredient:</label>
+        <input type="text" id="ingredient_input" placeholder="Enter main ingredient">
+    </div>
+    <button onclick="buttonClicked()">Meal Suggestions</button>
+</div>
+
+<!-- Display area for the recommended meals -->
+<div id="mealsDisplay"></div>
+
+<!-- Modal for displaying meal details -->
+<div id="mealModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-image-container">
+            <img id="mealImage" src="" alt="Meal Image">
+            <div><strong id="mealName"></strong></div>
+            <div><strong>Category:</strong> <span id="mealCategory"></span></div>
+            <div><strong>Area:</strong> <span id="mealArea"></span></div>
+        </div>
+        <div class="modal-details-container">
+            <h4>Ingredients & Measurements:</h4>
+            <ul id="mealIngredients"></ul>
+            <h4>Instructions:</h4>
+            <p id="mealInstructions"></p>
+            <div id="mealYoutube" class="youtube-link"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2024 GoodMeals. All rights reserved.
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

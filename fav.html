@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Meal Suggestions</title>
+    <style>
+        /* Basic styling */
+        body {
+            background-color: blanchedalmond;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        header {
+            background-color: maroon;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1em;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-link {
+            color: white;
+            background-color: peru;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .header-link:hover {
+            background-color: rosybrown;
+        }
+
+        /* Form container */
+        .form-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Meals display */
+        .meals-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .meal-container {
+            background-color: chocolate;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .meal-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .meal-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: chocolate;
+            color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .modal-image-container img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .modal-details-container {
+            width: 60%;
+        }
+
+        /* Remove from Favorite button styling */
+        .remove-favorite-button {
+            color: white;
+            background-color: maroon;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .remove-favorite-button:hover {
+            background-color: darkred;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: maroon;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="index.html">
+            <img src="Screenshot_2024-10-28_182841-removebg-preview.png" alt="GoodMeals Logo" class="logo">
+        </a>
+        <h1 class="header-title">GoodMeals - Favorites</h1>
+    </div>
+    <a href="secondpage.html" class="header-link">Previous page</a>
+</header>
+
+<div class="form-container">
+    <h2>Your Favorite Meals</h2>
+</div>
+
+<div id="favoritesDisplay" class="meals-display"></div>
+
+<!-- Modal for displaying meal details -->
+<div id="mealModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-image-container">
+            <img id="mealImage" src="" alt="Meal Image">
+            <div><strong id="mealName"></strong></div>
+            <div><strong>Category:</strong> <span id="mealCategory"></span></div>
+            <div><strong>Area:</strong> <span id="mealArea"></span></div>
+        </div>
+        <div class="modal-details-container">
+            <h4>Ingredients & Measurements:</h4>
+            <ul id="mealIngredients"></ul>
+            <h4>Instructions:</h4>
+            <p id="mealInstructions"></p>
+            <div id="mealYoutube" class="youtube-link"></div>
+            <button class="remove-favorite-button" onclick="removeFromFavorites()">Remove from Favorite</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2024 GoodMeals. All rights reserved.
+</footer>
+
+<script src="fav.js"></script>
+</body>
+</html>

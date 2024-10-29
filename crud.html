@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner and Recipe Manager</title>
+    <style>
+        /* Basic styling */
+        body {
+            background-color: blanchedalmond;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        header {
+            background-color: maroon;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1em;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .header-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* Link styling in header */
+        .header-link {
+            color: white;
+            background-color: peru;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .header-link:hover {
+            background-color: rosybrown;
+        }
+
+        /* Form container */
+        .form-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Form row styling */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: peru;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Meal display section */
+        #mealsList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .meal-container {
+            background-color: chocolate;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .meal-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .meal-ingredients {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #f0e68c;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: maroon;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+      <a href="index.html">
+        <img src="Screenshot_2024-10-28_182841-removebg-preview.png" alt="Express Meals Logo" class="logo">
+      </a>
+        <h1 class="header-title">GoodMeals!</h1>
+    </div>
+    <a href="secondpage.html" class="header-link">Meals Suggestions</a>
+</header>
+
+<div class="form-container">
+    <h2>Create your Meal Planner</h2>
+    <div class="form-row">
+        <input type="text" id="fileName" placeholder="Meal Name">
+        <textarea id="fileContents" placeholder="Enter list of ingredients" rows="4" cols="50"></textarea>
+    </div>
+    <button id="btnCreate">Create Meal</button>
+    <button id="btnRead">Read Meal</button>
+    <button id="btnUpdate">Update Meal</button>
+    <button id="btnDelete">Delete Meal</button>
+</div>
+
+<!-- Display area for all saved meals -->
+<div id="mealsList"></div>
+
+<footer>
+    © 2024 GoodMeals. All rights reserved.
+</footer>
+
+<script src="crud.js"></script>
+</body>
+</html>
